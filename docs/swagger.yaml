@@ -1,0 +1,132 @@
+definitions:
+  middleware.Doctor:
+    properties:
+      experience:
+        type: integer
+      id:
+        type: integer
+      name:
+        type: string
+      specialty:
+        type: string
+    type: object
+  middleware.Patient:
+    properties:
+      age:
+        type: integer
+      health:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+  middleware.response:
+    properties:
+      id:
+        type: integer
+      message:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /api/doctor/{id}:
+    get:
+      description: Gets a doctor's details from the database using their ID
+      parameters:
+      - description: Doctor ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/middleware.Doctor'
+        "404":
+          description: Not Found
+          schema:
+            type: string
+      summary: Retrieves a single doctor by ID
+      tags:
+      - Doctors
+  /api/newdoctor:
+    post:
+      consumes:
+      - application/json
+      description: Adds a new doctor record to the database
+      parameters:
+      - description: Doctor data
+        in: body
+        name: doctor
+        required: true
+        schema:
+          $ref: '#/definitions/middleware.Doctor'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/middleware.response'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+      summary: Creates a new doctor
+      tags:
+      - Doctors
+  /api/newpatient:
+    post:
+      consumes:
+      - application/json
+      description: Adds a new patient record to the database
+      parameters:
+      - description: Patient data
+        in: body
+        name: patient
+        required: true
+        schema:
+          $ref: '#/definitions/middleware.Patient'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/middleware.response'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+      summary: Creates a new patient
+      tags:
+      - Patients
+  /api/patient/{id}:
+    get:
+      description: Gets a patient's details from the database using their ID
+      parameters:
+      - description: Patient ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/middleware.Patient'
+        "404":
+          description: Not Found
+          schema:
+            type: string
+      summary: Retrieves a single patient by ID
+      tags:
+      - Patients
+swagger: "2.0"

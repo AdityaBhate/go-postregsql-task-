@@ -1,0 +1,205 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/api/doctor/{id}": {
+            "get": {
+                "description": "Gets a doctor's details from the database using their ID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Doctors"
+                ],
+                "summary": "Retrieves a single doctor by ID",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Doctor ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/middleware.Doctor"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/newdoctor": {
+            "post": {
+                "description": "Adds a new doctor record to the database",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Doctors"
+                ],
+                "summary": "Creates a new doctor",
+                "parameters": [
+                    {
+                        "description": "Doctor data",
+                        "name": "doctor",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/middleware.Doctor"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/middleware.response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/newpatient": {
+            "post": {
+                "description": "Adds a new patient record to the database",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Creates a new patient",
+                "parameters": [
+                    {
+                        "description": "Patient data",
+                        "name": "patient",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/middleware.Patient"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/middleware.response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/patient/{id}": {
+            "get": {
+                "description": "Gets a patient's details from the database using their ID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Retrieves a single patient by ID",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Patient ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/middleware.Patient"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "middleware.Doctor": {
+            "type": "object",
+            "properties": {
+                "experience": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "specialty": {
+                    "type": "string"
+                }
+            }
+        },
+        "middleware.Patient": {
+            "type": "object",
+            "properties": {
+                "age": {
+                    "type": "integer"
+                },
+                "health": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "middleware.response": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
